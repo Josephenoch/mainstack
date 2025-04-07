@@ -73,7 +73,7 @@ const queryClient = new QueryClient()
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <main className={`${degular.variable} font-degular`}>
+      <main className={`${degular.variable} font-degular relative`}>
         <Component {...pageProps} />
         <div id="modal-portal"/>
 

@@ -1,4 +1,4 @@
-import { Chart, DashboardText, TransactionItem } from "@/components/secondary";
+import { Chart, DashboardText, TransactionFilterOverlay, TransactionItem } from "@/components/secondary";
 import { Button } from "@/components/ui/button";
 import { SystemLayout } from "@/layout";
 import { fetchTransactionRequest } from "@/requests/transaction.request";
@@ -70,6 +70,7 @@ export default function Home() {
           })}
         </div>
       </section>
+      <TransactionFilterOverlay/>
     </SystemLayout>
 
   );

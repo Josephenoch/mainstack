@@ -52,7 +52,7 @@ const Overlay: FC<TProps> = ({ children, onClick, opacity, open, blur }) => {
   return ref.current && shouldRenderModal ? (
     createPortal(
       <div
-        className={`fixed inset-0 z-[1000000] ${modalOpen ? "opacity-100" : "opacity-0"} transition-all duration-500 ${blur ? 'backdrop-blur-sm' : ''}`}
+        className={`fixed inset-0 z-[100000000] ${modalOpen ? "opacity-100" : "opacity-0"} transition-all duration-500 ${blur ? 'backdrop-blur-sm' : ''}`}
         style={{
           background: `rgba(0, 0, 0, ${opacity / 100})`,
         }}
