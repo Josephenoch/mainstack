@@ -88,7 +88,7 @@ export default function Home() {
         <div className="space-y-4 mt-6">
           {data?.data.map(item=>{
             return(
-              <TransactionItem data={item}/>
+              <TransactionItem key={item.payment_reference} data={item}/>
             )
           })}
         </div>

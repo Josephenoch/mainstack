@@ -1,9 +1,8 @@
 import "@/styles/globals.css";
 import localFont from "next/font/local";
 import type { AppProps } from "next/app";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { User } from "lucide-react";
 import UserProvider from "@/context/UserContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const degular = localFont({
   src: [

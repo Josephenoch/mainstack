@@ -7,8 +7,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { Button } from "../ui/button"
-import { useQuery } from "@tanstack/react-query"
-import { fetchTransactionRequest } from "@/requests/transaction.request"
 import { FC, useMemo } from "react"
 import formatChartData from "@/helper/formatChartData"
 import { Transaction } from "@/types/transaction.type"
@@ -81,7 +79,10 @@ const Chart:FC<ChartInterface> = ({
   )
 }
 
-const getBottomYValue = (data: any[]) => {
+const getBottomYValue = (data:  {
+  date: string;
+  amount: number;
+}[]) => {
   if (!data || data.length === 0) return 0;
 
   let min = Number.MAX_VALUE;
