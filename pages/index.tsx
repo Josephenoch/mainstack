@@ -4,13 +4,36 @@ import { SystemLayout } from "@/layout";
 import { fetchTransactionRequest } from "@/requests/transaction.request";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 
 export default function Home() {
 
-  const {data} = useQuery({
+  const {data, isLoading} = useQuery({
     queryKey: ["get-chart-data"],
     queryFn: fetchTransactionRequest
   })
+  const [filterModalOpen, setFilterModal] = useState(false)
+  const [selectedTransactionTypeOptions, setSelectedTransactionTypeOptions] = useState<string[]>([])
+  const [selectedTransactionStatusOptions, setSelectedTransactionStatusOptions] = useState<string[]>([])
+
+  const handleSelected = (field: "type" | "status", item: string[]) => {
+    if(field === "type") {
+      setSelectedTransactionTypeOptions(() => ([...item]))
+    }else{
+      setSelectedTransactionStatusOptions(() => ([...item]))
+    }
+   
+  }
+
+  const transactionTypes = useMemo(()=>{
+    const types = data?.data.map(item=>item.type)
+    const status = data?.data.map(item=>item.status)
+    return {
+      type: [...new Set(types)],
+      status: [...new Set(status)]
+    }
+  },[isLoading])
+  
   return (
     <SystemLayout>
       <section className="flex justify-between">
@@ -70,7 +93,16 @@ export default function Home() {
           })}
         </div>
       </section>
-      <TransactionFilterOverlay/>
+      <TransactionFilterOverlay 
+        open={filterModalOpen}
+        onClose={()=>setFilterModal(false)}
+        transactionTypes={transactionTypes.type}
+        transactionStatus={transactionTypes.status}
+        selectedTransactionTypeOptions={selectedTransactionTypeOptions} 
+        selectedTransactionStatusOptions={selectedTransactionStatusOptions} 
+        setSelectedTransactionTypeOptions={(option)=> handleSelected("type", option)}
+        setSelectedTransactionStatusOptions={(option)=> handleSelected("status", option)}
+      />
     </SystemLayout>
 
   );
