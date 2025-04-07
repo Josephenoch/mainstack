@@ -14,7 +14,6 @@ const UserModal:FC<PropsType> = ({
   const {user} = useUser()
   return (
     <Overlay onClick={handleClose} opacity={20} open={open}>
-     
       <div className="w-[380px] absolute h-fit bg-white right-4 top-20 rounded-[20px] shadow-lg p-4 space-y-8">
         <div className="flex items-center space-x-2">
           <span className="size-10 font-lg flex items-center justify-center uppercase bg-gradient-to-r from-[#5C6670] to-[#131316] rounded-full text-white font-bold">
