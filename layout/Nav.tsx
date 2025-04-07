@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 const Nav = () => {
   return (
-    <nav className="w-[calc(100vw-8px)] bg-white left-1/2 -translate-x-1/2  fixed justify-between rounded-[100px] shadow-[0px_2px_4px_0px_#2D3B430D,_0px_2px_6px_0px_#2D3B430F] h-16 flex items-center pl-6 pr-4">
+    <nav className="w-[calc(100vw-8px)] bg-white z-[99999999] left-1/2 -translate-x-1/2  fixed justify-between rounded-[100px] shadow-[0px_2px_4px_0px_#2D3B430D,_0px_2px_6px_0px_#2D3B430F] h-16 flex items-center pl-6 pr-4">
       <Logo/>
       <ul className="flex items-center space-x-2">
         <NavLinkItem

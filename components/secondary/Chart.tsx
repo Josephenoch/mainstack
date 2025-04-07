@@ -1,87 +1,98 @@
-"use client"
 
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { CartesianGrid, Line, LineChart, ReferenceLine, XAxis } from "recharts"
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-]
+import { Button } from "../ui/button"
+import { useQuery } from "@tanstack/react-query"
+import { fetchTransactionRequest } from "@/requests/transaction.request"
+import { FC, useMemo } from "react"
+import formatChartData from "@/helper/formatChartData"
+import { Transaction } from "@/types/transaction.type"
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
-  },
-} satisfies ChartConfig
+interface ChartInterface {
+  data: Transaction[] | undefined
+}
 
-const Chart = () => {
+const Chart:FC<ChartInterface> = ({
+  data
+}) => {
+  
+  const chartData = useMemo(()=> {
+    if (!data) return []
+    return formatChartData(data)
+  },[data])
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Line Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+    <div>
+      <div className="flex items-center space-x-20">
+        <div className="flex flex-col">
+          <span>Available Balance</span>
+          <span className="text-4xl font-bold">USD 120,500.00</span>
+        </div>
+        <Button>Withdraw</Button>
+      </div>
+      <div>
+        <ChartContainer config={{}}>
           <LineChart
             accessibilityLayer
             data={chartData}
+            height={200}
             margin={{
               left: 12,
               right: 12,
             }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid horizontal={false} vertical={false} />
             <XAxis
-              dataKey="month"
+              tickMargin={2}
+              dataKey="date"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              interval="preserveStartEnd"
+              tickFormatter={(value, index) =>
+                index === 0 || index === chartData.length - 1 ? value : ''
+              }
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
             <Line
-              dataKey="desktop"
+              dataKey="amount"
               type="natural"
-              stroke="var(--color-desktop)"
-              strokeWidth={2}
+              stroke="#FF5403"
+              strokeWidth={1}
               dot={false}
+              
             />
-          </LineChart>
+            <ReferenceLine
+              y={getBottomYValue(chartData) - 200}
+              stroke="#E5E5E5"
+            />
+            </LineChart>
         </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
+      </div>
+   
+    </div>
   )
 }
+
+const getBottomYValue = (data: any[]) => {
+  if (!data || data.length === 0) return 0;
+
+  let min = Number.MAX_VALUE;
+
+  data.forEach(d => {
+    if (typeof d.amount === "number" && d.amount < min) {
+      min = d.amount;
+    }
+  });
+
+  return min;
+};
 
 export default Chart

@@ -1,5 +1,7 @@
-import { http } from "@/config/axios.config"
+import { AxiosPromise } from "axios";
+import { User } from "@/types/user.type";
+import { http } from "@/config/axios.config";
 
-const fetchWalletRequest = () => {
-  return http.get("/wallet")
+export const fetchUserRequest = () => {
+  return http.get("/wallet") as AxiosPromise<User>
 }

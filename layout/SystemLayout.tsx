@@ -9,9 +9,9 @@ const SystemLayout:FC<SystemLayoutInterface> = ({
   children
 }) => {
   return (
-    <div className="p-2">
+    <div className="p-2 bg-white/80 mb-10">
       <Nav/>
-      <div className="mt-20 px-20">
+      <div className="mt-36 px-40">
         {children}
       </div>
 

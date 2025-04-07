@@ -7,7 +7,7 @@ interface PropsType{
   className?: string
 }
 
-const Button:FC<PropsType> = ({
+const Logo:FC<PropsType> = ({
   className: addedClasses
 }) => {
   const className = twMerge(`relative size-9`, addedClasses)
@@ -23,4 +23,4 @@ const Button:FC<PropsType> = ({
   )
 }
 
-export default Button
+export default Logo

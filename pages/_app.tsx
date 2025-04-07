@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import localFont from "next/font/local";
 import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const degular = localFont({
   src: [
@@ -66,11 +67,18 @@ const degular = localFont({
   variable: "--font-degular"
 })
 
+const queryClient = new QueryClient()
+
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${degular.variable} font-degular`}>
-      <Component {...pageProps} />
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main className={`${degular.variable} font-degular`}>
+        <Component {...pageProps} />
+        <div id="modal-portal"/>
+
+      </main>
+    </QueryClientProvider>
   )
  
 
