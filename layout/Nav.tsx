@@ -1,13 +1,16 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import Logo from "@/components/ui/logo"
 import Image from "next/image"
 import Link from "next/link"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
+import { UserModal } from "@/components/secondary"
 
 
 
 const Nav = () => {
+  const [userModalOpen, setUserModalOpen] = useState(false)
   return (
+    <>
     <nav className="w-[calc(100vw-8px)] bg-white z-[99999999] left-1/2 -translate-x-1/2  fixed justify-between rounded-[100px] shadow-[0px_2px_4px_0px_#2D3B430D,_0px_2px_6px_0px_#2D3B430F] h-16 flex items-center pl-6 pr-4">
       <Logo/>
       <ul className="flex items-center space-x-2">
@@ -72,7 +75,10 @@ const Nav = () => {
         />
 
       </div>
+
     </nav>
+    <UserModal open={true} handleClose={()=>{}}/>
+    </>
 
   )
 }

@@ -22,7 +22,6 @@ export default function Home() {
     }else{
       setSelectedTransactionStatusOptions(() => ([...item]))
     }
-   
   }
 
   const transactionTypes = useMemo(()=>{
@@ -60,7 +59,8 @@ export default function Home() {
             <Button
               size="sm"
               variant="outline"
-              className="text-xs font-semibold bg-[#EFF1F6] border-none py-1"
+              onClick={()=>setFilterModal(true)}
+              className="text-xs font-semibold bg-[#EFF1F6] border-none py-1 cursor-pointer"
             >
               <span>Filter</span>
               <Image
