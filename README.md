@@ -106,14 +106,14 @@ This project was built to test key frontend skills such as React components, Rea
 
 You can reach out to me through the following platforms:
 
-- **Twitter**: [@techbrojoe](https://twitter.com/techbrojoe)
+- **Twitter**: [@techbrojoe](https://twitter.com/techbroj0e)
 - **LinkedIn**: [Joseph Enoch](https://www.linkedin.com/in/josephenoch)
 
 ---
 
 ## Licenses and Copyright
 
-Joseph Enoch © 2024
+Joseph Enoch © 2025
 
 ---
 
